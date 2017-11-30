@@ -81,7 +81,7 @@ int tun_send(struct sk_buff *skb, struct dnat_info *di)
 	eth->h_proto = htons(0x0801);
 	tp = skb_transport_header(tun_skb);
 	memcpy(tp, di, sizeof(struct dnat_info));
-	tun_skb->tail = (sk_buff_data_t)( tp+ sizeof(struct dnat_info));
+	tun_skb->tail = (sk_buff_data_t)( (unsigned long)tp+ sizeof(struct dnat_info));
 	tun_skb->data = tun_skb->head + tun_skb->mac_header;
 	tun_skb->len = tun_skb->transport_header + sizeof(struct dnat_info)-tun_skb->mac_header;
 	tun_skb->dev = tun_dev;

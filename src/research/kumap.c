@@ -206,7 +206,7 @@ typedef unsigned char *sk_buff_data_t;
 #endif
 */
 	//reset tun_skb->len
-	tun_skb->tail = (sk_buff_data_t)( (long long)tp+ sizeof(struct dnat_info));//(sk_buff_data_t)(tun_skb->head + tun_skb->transport_header + sizeof(struct dnat_info));
+	tun_skb->tail = (sk_buff_data_t)( (unsigned long)tp+ sizeof(struct dnat_info));//(sk_buff_data_t)(tun_skb->head + tun_skb->transport_header + sizeof(struct dnat_info));
 	tun_skb->data = tun_skb->head + tun_skb->mac_header;
 	tun_skb->len = tun_skb->transport_header + sizeof(struct dnat_info)-tun_skb->mac_header;//tun_skb->tail - tun_skb->data;
 	tun_skb->dev = tun_dev;

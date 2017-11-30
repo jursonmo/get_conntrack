@@ -158,7 +158,6 @@ void dump_ct_info(struct nf_conn *ct)
 
 int get_dnat_info(struct nf_conn *ct, struct dnat_info *di) {
 	struct nf_conntrack_tuple *t = NULL;
-	di = (struct dnat_info*)kmalloc(sizeof(struct dnat_info), GFP_ATOMIC);
 
 	t = &ct->tuplehash[IP_CT_DIR_ORIGINAL].tuple;
 	di->tuple_info[IP_CT_DIR_ORIGINAL].sip = t->src.u3.ip;

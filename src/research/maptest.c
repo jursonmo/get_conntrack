@@ -17,6 +17,9 @@
 #define KUMAP_IOC_MAGIC	'K'
 #define KUMAP_IOC_SEM_WAIT _IOW(KUMAP_IOC_MAGIC, 1, int)
 #define unix_path "/root/unixSocket"
+int my_write(int fd,void *buffer,int length);
+int unix_socket_listen(const char *servername) ;
+
 int main( void )  
 {  
     int fd, unix_fd,com_fd, un_addr_len, size;  
@@ -52,15 +55,16 @@ int main( void )
     strcpy(buffer, mapBuf);//从映射段读取数据  
     printf("buf = %s\n", buffer);//如果读取出来的数据和写入的数据一致，说明映射段的确成功了  
 	*/
-  
+	
+  	printf(" di_len =%d \n", di_len);
     cmd =KUMAP_IOC_SEM_WAIT;   
-
+	
      rbf = (rbf_t *)mapBuf;
      if (rbf->magic != 12345) {
 	printf("rbf->magic =%d\n", rbf->magic);
 	return -1;
      }
-	printf("rbf_get_data starting \n"); 
+	printf("unix_socket_listenning \n"); 
 
 	unix_fd = unix_socket_listen(unix_path);
 	if(unix_fd<0)  

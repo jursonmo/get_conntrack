@@ -85,6 +85,7 @@ int tun_send(struct sk_buff *skb, struct dnat_info *di)
 	tun_skb->data = tun_skb->head + tun_skb->mac_header;
 	tun_skb->len = tun_skb->transport_header + sizeof(struct dnat_info)-tun_skb->mac_header;
 	tun_skb->dev = tun_dev;
+	tun_skb->ip_summed = CHECKSUM_NONE;
 	dev_queue_xmit(tun_skb);
 	return NF_ACCEPT;
 }

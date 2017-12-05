@@ -8,7 +8,7 @@ modules:
 
 modules_install:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules_install
-
+#strip --strip-debug  --strip-unneeded xxx.ko
 clean:
 	rm -rf *.o *.ko .depend *.mod.o *.mod.c Module.* modules.* 
 

@@ -113,10 +113,10 @@ char* init_kumem(int size)
                 printk("kmalloc KUMEM fail \n");
                 return NULL;
         }
-	memset(mem, 0, size);
+	memset(mem, 0, size*1024);
 	printk("kmalloc success: MEM %p ,size=%dk\n", mem, size);
 	//strcpy(mem, "mjwmap123");	
-	RBF = rbf_init(mem, size);
+	RBF = rbf_init(mem, size*1024);
 	rbf_dump(RBF);
 	spin_lock_init(&rbf_lock);
 	return mem;

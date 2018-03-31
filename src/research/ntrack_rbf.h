@@ -49,8 +49,10 @@ static inline rbf_t* rbf_init(void *mem, uint32_t size)
 {
 	rbf_t *rbp = (rbf_t*)mem;
 	//WARN_ON((size % L1_CACHE_BYTES) || (RBF_NODE_SIZE % L1_CACHE_BYTES));
-
+	
 	#ifdef __KERNEL__
+	printk("sizeof(rbf_t)=%ld, sizeof(rbf_hdr_t)=%ld, offset, r=%ld, w=%ld,size=%ld,count=%ld,pad=%ld,magic=%ld\n", sizeof(rbf_t), sizeof(rbf_hdr_t)
+		, offsetof(rbf_hdr_t,r), offsetof(rbf_hdr_t,w), offsetof(rbf_hdr_t,size), offsetof(rbf_hdr_t,count), offsetof(rbf_hdr_t,pad), offsetof(rbf_t,magic));
 	printk(" rbf_init : L1_CACHE_BYTES =%d , size yu L1_CACHE_BYTES=%d, RBF_NODE_SIZE yu L1_CACHE_BYTES=%d \n", L1_CACHE_BYTES, size % L1_CACHE_BYTES, RBF_NODE_SIZE % L1_CACHE_BYTES);
 	#endif
 	memset(rbp, 0, sizeof(rbf_t));

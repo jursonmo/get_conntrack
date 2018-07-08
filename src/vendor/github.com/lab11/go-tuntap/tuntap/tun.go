@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"syscall"
 	"unsafe"
 )
 
@@ -87,6 +88,12 @@ func (t *Interface) ReadPacket() (*Packet, error) {
 func (t *Interface) Meta() bool {
 	return t.meta
 }
+
+func (t *Interface) SetNonblock() {
+	syscall.SetNonblock(int(t.file.Fd()), true)
+	//syscall.Socket()
+}
+
 func (t *Interface) ReadPacket2(buf []byte) (*Packet, error) {
 	//buf := make([]byte, 10000)
 
